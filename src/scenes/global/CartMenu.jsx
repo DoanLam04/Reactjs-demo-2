@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import AppUrl from "../../Api/AppUrl";
 import { Link } from "react-router-dom";
 import currency from "currency.js";
 import { useDispatch } from "react-redux";
+import { setRole } from "../../state/userSlice";
+import { Navigate } from "react-router-dom";
+
 import {
   removeFromCart,
   increaseCount,
@@ -11,6 +14,9 @@ import {
 } from "../../state/cartSlice";
 export default function CartMenu() {
   const dispatch = useDispatch();
+  const [userRole, setUserRole] = useState(
+    useSelector((state) => state.user.role)
+  );
 
   var cartItems = useSelector((state) => state.cart.items);
   const totalItems = cartItems.reduce((total, item) => {
@@ -93,6 +99,7 @@ export default function CartMenu() {
 
   return (
     <div className="well well-small">
+      {userRole === "Public" && <Navigate to="/login" replace={true} />}
       <h1>
         Cart{" "}
         <small className="pull-right">

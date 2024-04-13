@@ -6,7 +6,7 @@ export default function MainCarousel() {
       <div className="carousel-inner">
         <div className="item next left">
           <img
-            src="/assets/img/bootstrap_free-ecommerce.png"
+            src="/assets/img/slide1.png"
             style={{ width: "100%" }}
             alt="bootstrap ecommerce templates"
           />
@@ -21,7 +21,7 @@ export default function MainCarousel() {
         <div className="item">
           <img
             style={{ width: "100%" }}
-            src="/assets/img/slide1.png"
+            src="/assets/img/banner.jpg"
             alt="bootstrap ecommerce templates"
           />
           <div className="carousel-caption">
@@ -47,7 +47,7 @@ export default function MainCarousel() {
         <div className="item active left">
           <img
             style={{ width: "100%" }}
-            src="/assets/img/bootstrap-templates.png"
+            src="/assets/img/banner1.jpg"
             alt="bootstrap templates"
           />
           <div className="carousel-caption">
