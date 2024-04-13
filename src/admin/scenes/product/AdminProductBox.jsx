@@ -40,20 +40,21 @@ export default function AdminProductBox() {
   };
 
   const handleDelete = (e) => {
+    console.log("e", e);
     const deleteProduct = async (id) => {
-      var c = window.confirm("delete product?");
-      if (c == true)
+      console.log("id: " + id);
+      const c = window.confirm("delete product?");
+      if (c === true)
         try {
           e.target.classList.remove("fa-trash");
           e.target.classList.add("fa-spinner");
-
-          await productApi.del(id);
+          await productApi.delete(id);
           e.target.classList.add("fa-trash");
           e.target.classList.remove("fa-spinner");
           setSuccessMsg("Xoa thanh cong: " + id);
           setLoadData(loadData + 1);
         } catch (error) {
-          setWarningMsg("Delete error: " + id + error);
+          setWarningMsg("Delete error: " + id + " " + error);
         } finally {
           window.scroll(0, 0);
         }

@@ -17,8 +17,8 @@ export const productApi = {
     var url = `/products/${id}`;
     return axiosInstance.put(url, data);
   },
-  del(id) {
-    var url = `/products/${id}`;
+  delete(id) {
+    var url = `products/${id}`;
     return axiosInstance.delete(url);
   },
 };

@@ -1,11 +1,12 @@
 import React from "react";
 import AppUrl from "../../../Api/AppUrl";
+import { Link } from "react-router-dom";
 export default function AdminProductItem(props) {
-  var stt = props.stt;
-  var product = props.product;
-  var handleDelete = props.handleDelete;
-  var handlePublish = props.handlePublish;
-  var myView =
+  const stt = props.stt;
+  const product = props.product;
+  const handleDelete = props.handleDelete;
+  const handlePublish = props.handlePublish;
+  const myView =
     product.attributes.publishedAt == null ? (
       <input
         type="range"
@@ -47,11 +48,15 @@ export default function AdminProductItem(props) {
       <td> {product.attributes.price}</td>
       <td> {myView}</td>
       <td className="text-center" style={{ fontSize: "1.2em" }}>
-        <a className="btn btn-sm btn-primary">
-          <i name={product.id} class="icon-edit"></i>{" "}
-        </a>
+        <Link
+          to={"/admin/product/edit/" + product.id}
+          className="btn btn-sm btn-primary"
+        >
+          <i name={product.id} class="icon-edit"></i>
+        </Link>
+
         <a className="btn btn-sm btn-danger">
-          <i class="fas fa-trash" onClick={handleDelete}></i>
+          <i name={product.id} class="fas fa-trash" onClick={handleDelete}></i>
         </a>
       </td>
     </tr>

@@ -6,6 +6,8 @@ import { validateProduct } from "../../helpers/validate";
 import "react-toastify/dist/ReactToastify.css";
 import FileUpload from "../../../components/FileUpload";
 import AppUrl from "../../../Api/AppUrl";
+import { Link } from "react-router-dom";
+
 export default function AdminProductAdd() {
   const [data, setData] = useState({
     productName: "",
@@ -30,7 +32,7 @@ export default function AdminProductAdd() {
     ]);
   };
   const handleRemove = (e) => {
-    var id = e.target.name;
+    const id = e.target.name;
     setData({
       ...data,
       image: data.image.filter((img) => {
@@ -44,7 +46,7 @@ export default function AdminProductAdd() {
       })
     );
   };
-  var myViewImage =
+  const myViewImage =
     images.length === 0
       ? "no image"
       : images.map((img) => {
@@ -166,6 +168,16 @@ export default function AdminProductAdd() {
               <button name="submit" type="submit" className="btn btn-primary">
                 Submit
               </button>
+              <Link to={"/admin/product"}>
+                <button
+                  name="submit"
+                  type="submit"
+                  className="btn btn-success"
+                  style={{ marginLeft: "15px" }}
+                >
+                  Back
+                </button>
+              </Link>
             </div>
           </div>
         </form>

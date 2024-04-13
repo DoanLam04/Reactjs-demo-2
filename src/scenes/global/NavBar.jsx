@@ -18,7 +18,7 @@ export default function NavBar() {
           </a>
           <div className="nav-collapse">
             <ul className="nav">
-              <li className="active">
+              <li>
                 <Link to="/">Home </Link>
               </li>
               <li>
@@ -75,9 +75,12 @@ export default function NavBar() {
                       <label className="checkbox">
                         <input type="checkbox" /> Remember me
                       </label>
-                      <button type="submit" className="shopBtn btn-block">
-                        Sign in
-                      </button>
+                      <Link to="/login">
+                        {" "}
+                        <button type="submit" className="shopBtn btn-block">
+                          Sign in
+                        </button>
+                      </Link>
                     </div>
                   </form>
                 </div>

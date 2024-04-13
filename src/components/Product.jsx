@@ -15,6 +15,7 @@ export default function Product(props) {
           src={
             AppUrl.ImageURL + product.attributes.image.data[0].attributes.url
           }
+          style={{ height: "250px" }}
           alt="tam"
         />
       </Link>

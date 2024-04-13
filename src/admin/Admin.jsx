@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import Menu from "./components/Menu";
 import TopNav from "./components/TopNav";
 import { Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 export default function Admin() {
-  var ss = document.createElement("link");
+  const [role, setRole] = useState(useSelector((state) => state.user.role));
+
+  const ss = document.createElement("link");
   ss.rel = "stylesheet";
   ss.type = "text/css";
   ss.href = "/admin/dist/css/adminlte.min.css";
   document.head.appendChild(ss);
   return (
     <div className="wrapper">
+      {role === "Authenticated" && <Navigate to="/product" replace={true} />}
+      {role === "Public" && <Navigate to="/Login" replace={true} />}
       <Menu />
       <TopNav />
       <div className="content-wrapper">

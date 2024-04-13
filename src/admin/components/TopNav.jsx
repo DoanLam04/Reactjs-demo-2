@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import AuthBox from "../../scenes/global/AuthBox";
 
 export default function TopNav() {
   return (
@@ -11,9 +13,9 @@ export default function TopNav() {
           </a>
         </li>
         <li className="nav-item d-none d-sm-inline-block">
-          <a href="../../index3.html" className="nav-link">
+          <Link to={"/admin"} className="nav-link">
             Home
-          </a>
+          </Link>
         </li>
         <li className="nav-item d-none d-sm-inline-block">
           <a href="#" className="nav-link">
@@ -194,6 +196,8 @@ export default function TopNav() {
             <i className="fas fa-th-large" />
           </a>
         </li>
+
+        <AuthBox />
       </ul>
     </nav>
   );

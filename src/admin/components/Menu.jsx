@@ -6,7 +6,7 @@ export default function Menu() {
       {/* Brand Logo */}
       <a href="../../index3.html" className="brand-link">
         <img
-          src="../admin/dist/img/AdminLTELogo.png"
+          src="/admin/dist/img/AdminLTELogo.png"
           alt="AdminLTE Logo"
           className="brand-image img-circle elevation-3"
           style={{ opacity: ".8" }}

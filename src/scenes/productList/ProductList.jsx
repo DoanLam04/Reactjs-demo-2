@@ -17,6 +17,7 @@ export default function ProductList() {
   var [totalPage, settotalPage] = useState(1);
   var [filterKey, setFilterKey] = useState("");
   var [maxPrice, setMaxPrice] = useState(100000);
+  var [minPrice, setMinPrice] = useState(1000);
   var [category, setCategory] = useState(null);
 
   const handleFilterByName = (e) => {
@@ -25,6 +26,9 @@ export default function ProductList() {
 
   const handleFilterByMaxPrice = (e) => {
     setMaxPrice(e.target.value);
+  };
+  const handleFilterByMinPrice = (e) => {
+    setMinPrice(e.target.value);
   };
   const handleFilterByCategory = (e) => {
     if (e.target.innerText === `All categories`) setCategory(null);
@@ -39,7 +43,10 @@ export default function ProductList() {
     },
     filters: {
       productName: { $contains: filterKey ? filterKey : null },
-      price: { $lt: maxPrice ? maxPrice : 1000000 },
+      price: {
+        $lt: maxPrice ? maxPrice : 100000,
+        $gt: minPrice ? minPrice : 1000,
+      },
       category: { categoryName: { $eq: category ? category : null } },
     },
   };
@@ -71,7 +78,7 @@ export default function ProductList() {
       setLoading(false);
     };
     fetchData();
-  }, [pageNum, filterKey, maxPrice, category]);
+  }, [pageNum, filterKey, maxPrice, minPrice, category]);
 
   return (
     <div className="row">
@@ -83,6 +90,7 @@ export default function ProductList() {
           handleFilterByName={handleFilterByName}
           handleFilterByMaxPrice={handleFilterByMaxPrice}
           handleFilterByCategory={handleFilterByCategory}
+          handleFilterByMinPrice={handleFilterByMinPrice}
         />
         {myView2}
         <Paginate

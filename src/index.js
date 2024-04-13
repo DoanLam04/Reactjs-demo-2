@@ -15,7 +15,11 @@ import AdminProduct from "./admin/scenes/product/AdminProduct";
 import AdminProductAdd from "./admin/scenes/product/AdminProductAdd";
 import AdminProductBox from "./admin/scenes/product/AdminProductBox";
 import AdminProductDetail from "./admin/scenes/product/AdminProductDetail";
-import AdminProductEdit from "./admin/scenes/product/AdminProduct";
+import AdminProductEdit from "./admin/scenes/product/AdminProductEdit";
+import Login from "./auth/Login";
+import Register from "./auth/Register";
+import { Provider } from "react-redux";
+import store from "../src/state/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const router = createBrowserRouter([
@@ -27,6 +31,8 @@ const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
+      { path: "register", element: <Register /> },
+      { path: "login", element: <Login /> },
       {
         path: "product",
         element: <ProductList />,
@@ -77,16 +83,15 @@ const router = createBrowserRouter([
             path: "/admin/product/page/:pageNum",
             element: <AdminProductBox />,
           },
-
-          {
-            path: "/admin/product/edit/:id",
-            element: <AdminProductEdit />,
-          },
         ],
       },
       {
         path: "/admin/product/add",
         element: <AdminProductAdd />,
+      },
+      {
+        path: "/admin/product/edit/:id",
+        element: <AdminProductEdit />,
       },
     ],
   },
@@ -94,7 +99,9 @@ const router = createBrowserRouter([
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}></RouterProvider>
+    <Provider store={store}>
+      <RouterProvider router={router}></RouterProvider>
+    </Provider>
   </React.StrictMode>
 );
 
