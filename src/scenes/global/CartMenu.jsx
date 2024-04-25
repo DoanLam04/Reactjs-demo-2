@@ -6,7 +6,6 @@ import currency from "currency.js";
 import { useDispatch } from "react-redux";
 import { setRole } from "../../state/userSlice";
 import { Navigate } from "react-router-dom";
-
 import {
   removeFromCart,
   increaseCount,

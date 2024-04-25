@@ -71,7 +71,7 @@ export default function AdminProductEdit() {
       })
     );
   };
-  var myViewImage =
+  const myViewImage =
     images.length == 0
       ? "no image"
       : images.map((img) => {

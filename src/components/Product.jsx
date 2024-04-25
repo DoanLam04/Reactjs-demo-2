@@ -40,7 +40,6 @@ export default function Product(props) {
           alt="tam"
         />
       </Link>
-
       <div className="caption cntr">
         <Link to={"/product/" + product.id}>
           <p>{product.attributes.productName}</p>

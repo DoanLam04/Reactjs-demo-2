@@ -20,6 +20,10 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import { Provider } from "react-redux";
 import store from "../src/state/store";
+import AdminCategory from "./admin/scenes/category/AdminCategory";
+import AdminCategoryBox from "./admin/scenes/category/AdminCategoryBox";
+import AdminCategoryAdd from "./admin/scenes/category/AdminCategoryAdd";
+import AdminCategoryEdit from "./admin/scenes/category/AdminCategoryEdit";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const router = createBrowserRouter([
@@ -92,6 +96,33 @@ const router = createBrowserRouter([
       {
         path: "/admin/product/edit/:id",
         element: <AdminProductEdit />,
+      },
+      //----------------------------------------------------------------
+      {
+        path: "/admin/category",
+        element: <AdminCategory />,
+        children: [
+          {
+            index: true,
+            element: <AdminCategoryBox />,
+          },
+          {
+            path: "/admin/category/:id",
+            element: <AdminProductDetail />,
+          },
+          {
+            path: "/admin/category/page/:pageNum",
+            element: <AdminCategoryBox />,
+          },
+        ],
+      },
+      {
+        path: "/admin/category/add",
+        element: <AdminCategoryAdd />,
+      },
+      {
+        path: "/admin/category/edit/:id",
+        element: <AdminCategoryEdit />,
       },
     ],
   },

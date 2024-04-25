@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import AdminProductItem from "./AdminProductItem";
-import Loading from "../../../components/Loading";
-import { productApi } from "../../../Api/productApi";
 import { Link, useParams } from "react-router-dom";
 import Paginate from "../../../components/Paginate";
+import { categoryApi } from "../../../Api/categoryApi";
+import Loading from "../../../components/Loading";
 import Search from "../../../components/Search";
+import AdminCategoryItem from "./AdminCategoryItem";
 
-export default function AdminProductBox() {
-  const [products, setProducts] = useState({});
+export default function AdminCategoryBox() {
+  const [categories, setCategories] = useState({});
   const [loading, setLoading] = useState(true);
   const [totalPage, settotalPage] = useState(1);
   const [msgSuccess, setSuccessMsg] = useState("");
@@ -15,13 +15,11 @@ export default function AdminProductBox() {
   const [loadData, setLoadData] = useState(1);
   const [viewOption, setViewOption] = useState("preview");
   const [filterKey, setFilterKey] = useState("");
-
   const { pageNum } = useParams();
 
   const handleSelect = (e) => {
     setViewOption(e.target.value);
   };
-
   const handlePublish = (e) => {
     const data = {
       data: {
@@ -30,7 +28,7 @@ export default function AdminProductBox() {
     };
 
     const togglePublish = async (e) => {
-      await productApi.update(e.target.getAttribute("name"), data);
+      await categoryApi.update(e.target.getAttribute("name"), data);
       setLoadData(loadData + 1);
     };
     togglePublish(e);
@@ -38,17 +36,16 @@ export default function AdminProductBox() {
   const handleFilterByName = (e) => {
     setFilterKey(e.target.value);
   };
-
   const handleDelete = (e) => {
     console.log("e", e);
-    const deleteProduct = async (id) => {
+    const deleteCategory = async (id) => {
       console.log("id: " + id);
-      const c = window.confirm("delete product?");
+      const c = window.confirm("delete category?");
       if (c === true)
         try {
           e.target.classList.remove("fa-trash");
           e.target.classList.add("fa-spinner");
-          await productApi.delete(id);
+          await categoryApi.del(id);
           e.target.classList.add("fa-trash");
           e.target.classList.remove("fa-spinner");
           setSuccessMsg("Xoa thanh cong: " + id);
@@ -59,27 +56,26 @@ export default function AdminProductBox() {
           window.scroll(0, 0);
         }
     };
-    deleteProduct(e.target.getAttribute("name"));
+    deleteCategory(e.target.getAttribute("name"));
   };
-  var params = {
+  const params = {
     populate: "*",
     "pagination[pageSize]": 12,
     "pagination[page]": pageNum ? pageNum : 1,
     publicationState: viewOption,
     filters: {
-      productName: { $contains: filterKey ? filterKey : null },
+      categoryName: { $contains: filterKey ? filterKey : null },
     },
   };
-
   var myView =
     loading === true ? (
       <Loading />
     ) : (
-      products.map((product, i) => (
-        <AdminProductItem
-          key={product.id}
+      categories.map((category, i) => (
+        <AdminCategoryItem
+          key={category.id}
           stt={(pageNum - 1) * 12 + i + 1}
-          product={product}
+          category={category}
           handleDelete={handleDelete}
           handlePublish={handlePublish}
         />
@@ -87,9 +83,9 @@ export default function AdminProductBox() {
     );
   useEffect(() => {
     const fetchData = async () => {
-      var response = await productApi.getAll(params);
+      var response = await categoryApi.getAll(params);
       console.log(response);
-      setProducts(response.data.data);
+      setCategories(response.data.data);
       settotalPage(response.data.meta.pagination.pageCount);
       setLoading(false);
     };
@@ -104,8 +100,8 @@ export default function AdminProductBox() {
       <div id="example1_wrapper" className="dataTables_wrapper dt-bootstrap4">
         <div className="row">
           <div className="col-sm-12 col-md-6">
-            <Link to="/admin/product/add" className="btn btn-primary">
-              Create Product
+            <Link to="/admin/category/add" className="btn btn-primary">
+              Create Category
             </Link>
           </div>
           <div className="col-sm-12 col-md-6">
@@ -153,7 +149,7 @@ export default function AdminProductBox() {
                     colSpan={1}
                     aria-label="Browser: activate to sort column ascending"
                   >
-                    Product ID{" "}
+                    Category ID{" "}
                   </th>
                   <th
                     className="sorting"
@@ -164,28 +160,9 @@ export default function AdminProductBox() {
                     aria-sort="ascending"
                     aria-label="Rendering engine: activate to sort column descending"
                   >
-                    ProductName
+                    Category Name
                   </th>
-                  <th
-                    className="sorting"
-                    tabIndex={0}
-                    aria-controls="example1"
-                    rowSpan={1}
-                    colSpan={1}
-                    aria-label="Browser: activate to sort column ascending"
-                  >
-                    Image{" "}
-                  </th>
-                  <th
-                    className="sorting"
-                    tabIndex={0}
-                    aria-controls="example1"
-                    rowSpan={1}
-                    colSpan={1}
-                    aria-label="Platform(s): activate to sort column ascending"
-                  >
-                    Price
-                  </th>
+
                   <th
                     className="sorting"
                     tabIndex={0}
@@ -214,7 +191,7 @@ export default function AdminProductBox() {
           <Paginate
             totalPage={totalPage}
             currentPage={pageNum ? pageNum : 1}
-            basePath="http://localhost:3000/admin/product/page/"
+            basePath="http://localhost:3000/admin/category/page/"
           />
         </div>
       </div>
